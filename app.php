@@ -1,11 +1,11 @@
 <?php
 
+require dirname(__FILE__) . '/vendor/autoload.php';
+
 use Ratchet\Server\IoServer;
 use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
-use MyApp\Socket;
-
-require dirname(__FILE__) . '/vendor/autoload.php';
+use MapSkool\Socket;
 
 $socket = new Socket();
 $server = IoServer::factory(
@@ -27,6 +27,7 @@ $server->loop->addPeriodicTimer(5, function() use ($socket, &$file, &$lastUpdate
 
     $fileModifyDate = filemtime($file);
     echo "fileModifyDate: {$fileModifyDate}\n";
+
     if ($fileModifyDate === false) {
         throw new Exception("Could not read last modificatiion time");
     }
@@ -38,7 +39,6 @@ $server->loop->addPeriodicTimer(5, function() use ($socket, &$file, &$lastUpdate
         $data = $socket->getExcelData($file);
 
         foreach ($socket->clients as $client) {
-            file_put_contents("client.txt", $client);
             $client->send(json_encode($data));
         }
     }

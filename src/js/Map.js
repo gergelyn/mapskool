@@ -20,9 +20,6 @@ class MapSkool {
             await this.drawMarkers();
         };
     }
-    send(msg) {
-        this.socket.send(msg);
-    }
     async drawMarkers() {
         if (this.markers.length > 0) {
             this.markers.forEach((marker) => {

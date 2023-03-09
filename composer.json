@@ -1,11 +1,11 @@
 {
     "autoload": {
         "psr-4": {
-            "MyApp\\": "app"
+            "MapSkool\\": "app",
+            "Shuchkin\\": "app"
         }
     },
     "require": {
-        "phpoffice/phpspreadsheet": "^1.27",
         "cboden/ratchet": "^0.4"
     }
 }
